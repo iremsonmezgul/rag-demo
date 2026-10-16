@@ -1,4 +1,5 @@
 from sentence_transformers import SentenceTransformer, util
+from google import genai
 
 
 def chunk_text(file_path, chunk_size=500):
@@ -63,10 +64,31 @@ def retrieve_semantic(question, chunks, model, top_k=3):
     for score, index in zip(top_results.values, top_results.indices):
         results.append((chunks[int(index)], float(score)))
 
-    return results            
-       
+    return results
+ 
+
+def generate_answer(question, context_chunks, client):
+    context = "\n\n".join(context_chunks)
+
+    prompt = f"""Sen Örnek Bank'ın müşteri hizmetleri asistanısın.
+Aşağıdaki bilgilere dayanarak müşterinin sorusunu kısa ve nazik bir şekilde cevapla.
+Cevap bilgilerde yoksa bilmediğini söyle, bilgi uydurma.
+
+Bilgiler:
+{context}
+
+Soru: {question}
+Cevap:"""
+
+    interaction = client.interactions.create(
+        model="gemini-3.8-flash",
+        input=prompt,
+    )
+    return interaction.output_text
+
 
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
+client = genai.Client()
 chunks = chunk_by_paragraph("data/bank_faq_tr.txt")
 
 THRESHOLD = 0.5
@@ -86,7 +108,9 @@ for q in questions:
     if best_score < THRESHOLD:
         print(f"  Emin değilim (skor: {best_score:.2f}). Müşteri temsilcisine aktarılıyor.")
     else:
-        print(f"  Bulunan parça (skor: {best_score:.2f}):")
-        print(" ", best_chunk.split("\n")[0])
+        context_chunks = [chunk for chunk, score in results]
+        answer = generate_answer(q, context_chunks, client)
+        print(f"  (skor: {best_score:.2f})")
+        print("  CEVAP:", answer)
 
     print("=====")
