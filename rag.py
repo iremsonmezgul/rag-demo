@@ -26,9 +26,29 @@ def chunk_by_paragraph(file_path):
 
     return chunks
 
+def retrieve(question, chunks):
+    question_words = question.lower().split()
+
+    best_chunk = None
+    best_score = 0
+
+    for chunk in chunks:
+        chunk_words = chunk.lower().split()
+
+        score = 0
+        for word in question_words:
+            if word in chunk_words:
+                score += 1
+
+        if score > best_score:
+            best_score = score
+            best_chunk = chunk
+        
+    return best_chunk
+            
+       
 
 chunks = chunk_by_paragraph("data/bank_faq_tr.txt")
-print(len(chunks))
-for c in chunks:
-    print("---")
-    print(c)
+question = "kartımı kaybettim ne yapmalıyım"
+answer = retrieve(question, chunks)
+print(answer)
