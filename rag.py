@@ -51,18 +51,25 @@ def retrieve(question, chunks):
     return best_chunk
 
 
-def retrieve_semantic(question, chunks, model):
+def retrieve_semantic(question, chunks, model, top_k=3):
     chunk_embeddings = model.encode(chunks)
     question_embedding = model.encode(question)
 
     scores = util.cos_sim(question_embedding, chunk_embeddings)[0]
 
-    best_index = int(scores.argmax())
-    return chunks[best_index], float(scores[best_index])            
+    top_results = scores.topk(top_k)
+
+    results = []
+    for score, index in zip(top_results.values, top_results.indices):
+        results.append((chunks[int(index)], float(score)))
+
+    return results            
        
 
 model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 chunks = chunk_by_paragraph("data/bank_faq_tr.txt")
+
+THRESHOLD = 0.5
 
 questions = [
     "kartımı kaybettim ne yapmalıyım",
@@ -72,8 +79,14 @@ questions = [
 
 for q in questions:
     print("SORU:", q)
-    print("KELİME ARAMASI:", retrieve(q, chunks))
-    answer, score = retrieve_semantic(q, chunks, model)
-    print("EMBEDDING ARAMASI:", answer)
-    print("BENZERLİK SKORU:", round(score, 2))
+    results = retrieve_semantic(q, chunks, model)
+
+    best_chunk, best_score = results[0]
+
+    if best_score < THRESHOLD:
+        print(f"  Emin değilim (skor: {best_score:.2f}). Müşteri temsilcisine aktarılıyor.")
+    else:
+        print(f"  Bulunan parça (skor: {best_score:.2f}):")
+        print(" ", best_chunk.split("\n")[0])
+
     print("=====")
