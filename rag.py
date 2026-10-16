@@ -1,3 +1,6 @@
+from sentence_transformers import SentenceTransformer, util
+
+
 def chunk_text(file_path, chunk_size=500):
     with open(file_path, "r", encoding="utf-8") as f:
         text = f.read()
@@ -21,10 +24,11 @@ def chunk_by_paragraph(file_path):
 
     for p in paragraphs:
         p = p.strip()
-        if p:
+        if len(p) > 80:
             chunks.append(p)
 
     return chunks
+
 
 def retrieve(question, chunks):
     question_words = question.lower().split()
@@ -45,10 +49,31 @@ def retrieve(question, chunks):
             best_chunk = chunk
         
     return best_chunk
-            
+
+
+def retrieve_semantic(question, chunks, model):
+    chunk_embeddings = model.encode(chunks)
+    question_embedding = model.encode(question)
+
+    scores = util.cos_sim(question_embedding, chunk_embeddings)[0]
+
+    best_index = int(scores.argmax())
+    return chunks[best_index], float(scores[best_index])            
        
 
+model = SentenceTransformer("paraphrase-multilingual-MiniLM-L12-v2")
 chunks = chunk_by_paragraph("data/bank_faq_tr.txt")
-question = "kartımı kaybettim ne yapmalıyım"
-answer = retrieve(question, chunks)
-print(answer)
+
+questions = [
+    "kartımı kaybettim ne yapmalıyım",
+    "kartım çalındı",
+    "başka bankaya para göndermek istiyorum",
+]
+
+for q in questions:
+    print("SORU:", q)
+    print("KELİME ARAMASI:", retrieve(q, chunks))
+    answer, score = retrieve_semantic(q, chunks, model)
+    print("EMBEDDING ARAMASI:", answer)
+    print("BENZERLİK SKORU:", round(score, 2))
+    print("=====")
