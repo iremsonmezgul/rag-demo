@@ -1,0 +1,22 @@
+Örnek Bank Müşteri Hizmetleri - Sıkça Sorulan Sorular
+
+Kredi kartı başvurusu nasıl yapılır?
+Kredi kartı başvurunuzu mobil uygulamamız, internet şubemiz veya şubelerimiz üzerinden yapabilirsiniz. Başvuru için 18 yaşını doldurmuş olmanız ve düzenli bir gelir belgeniz bulunması gerekir. Başvurunuz genellikle 2 iş günü içinde değerlendirilir ve sonuç size SMS ile bildirilir. Onaylanan kartlar adresinize kargo ile 5 iş günü içinde teslim edilir.
+
+Kartımı kaybettim, ne yapmalıyım?
+Kartınızı kaybettiyseniz veya çaldırdıysanız hemen 0850 000 00 00 numaralı müşteri hizmetlerimizi arayarak kartınızı kullanıma kapatın. Mobil uygulamadaki "Kartlarım" menüsünden de kartınızı anında geçici olarak dondurabilirsiniz. Kartınız kapatıldıktan sonra yeni kartınız ücretsiz olarak adresinize gönderilir.
+
+Havale ve EFT arasındaki fark nedir?
+Havale, aynı banka içindeki hesaplar arasında yapılan para transferidir ve anında gerçekleşir. EFT ise farklı bankalar arasında yapılan transferdir. EFT işlemleri hafta içi mesai saatlerinde gerçekleşir. FAST sistemi sayesinde belirli bir tutara kadar olan transferler ise 7 gün 24 saat anında yapılabilir.
+
+Mobil uygulama şifremi unuttum.
+Mobil uygulamanın giriş ekranındaki "Şifremi Unuttum" bağlantısına tıklayın. Kimlik numaranızı ve kayıtlı telefon numaranıza gelen doğrulama kodunu girerek yeni şifrenizi oluşturabilirsiniz. Güvenliğiniz için şifrenizi kimseyle paylaşmayın; bankamız hiçbir zaman telefonla veya e-postayla şifrenizi istemez.
+
+Hesap işletim ücreti alınıyor mu?
+Bireysel vadesiz hesaplarımızdan hesap işletim ücreti alınmamaktadır. Ancak bazı özel hizmetler için ücret uygulanabilir. Güncel ücret tarifesine internet sitemizdeki "Ücretler ve Komisyonlar" sayfasından ulaşabilirsiniz.
+
+Vadeli mevduat hesabı nasıl açılır?
+Vadeli mevduat hesabını mobil uygulama üzerinden birkaç adımda açabilirsiniz. Vade süresi 32 gün ile 1 yıl arasında seçilebilir. Faiz oranı, seçtiğiniz vade süresine ve yatırdığınız tutara göre belirlenir. Vadesi dolmadan hesabı bozarsanız faiz kazancınızı kaybedebilirsiniz.
+
+Müşteri hizmetlerine nasıl ulaşabilirim?
+Müşteri hizmetlerimize 7 gün 24 saat 0850 000 00 00 numarasından ulaşabilirsiniz. Ayrıca mobil uygulamadaki canlı destek özelliğini kullanarak bir müşteri temsilcisiyle yazışabilirsiniz. Şubelerimiz hafta içi 09:00 ile 17:00 saatleri arasında hizmet vermektedir.
